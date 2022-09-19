@@ -10,7 +10,6 @@ public class PlanoDeSaude {
 	private LocalDate validade;
 	private String numero;
 	
-	
 	public void setOperadora(String operadora) {
 		this.operadora = operadora;
 	}
@@ -43,16 +42,5 @@ public class PlanoDeSaude {
 	public String getNumero() {
 		return numero;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
