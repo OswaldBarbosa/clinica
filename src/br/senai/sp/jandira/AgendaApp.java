@@ -176,6 +176,9 @@ public class AgendaApp {
 		System.out.println("Data da consulta: " + agenda2.getDataDaConsulta());
 		System.out.println("Horario da consulta: " + agenda2.getHorarioDaColsulta());
 		
+		
+		
 	}
+	
 
 }
