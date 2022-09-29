@@ -63,7 +63,7 @@ public class TesteWrappers {
 		
 		System.out.println(notas.size());
 		
-		//Queremos ve o nome da especialdade que está na posição do ArrayLIst especialdades
+		//Queremos ver o nome da especialdade que está na posição do ArrayLIst especialdades
 		System.out.println(especialidades.get(3).getNome());
 		
 		especialidades.get(1).setNome("Teste");
@@ -71,6 +71,9 @@ public class TesteWrappers {
 		
 		Especialidade nova = especialidades.get(2);
 		System.out.println(nova.getNome());
+		nova.setNome("Não é mais fisi");
+		
+		System.out.println(especialidades.get(2).getNome());
 		
 		
 		
