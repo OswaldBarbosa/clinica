@@ -38,7 +38,6 @@ public class EspecialidadeDAO {
                 especialidade.set(especialidade.indexOf(e), especialidadeAtualizada);
                 break;
             }
-            i++;
         }
     }
 
@@ -51,5 +50,20 @@ public class EspecialidadeDAO {
             }
         }
     }
-
+    
+    //Criar uma lista inicial de especialidade
+    public static void criarListaDeEspecialidade(){
+        Especialidade e1 = new Especialidade("Cardiologia", "Cuida do coração");
+        Especialidade e2 = new Especialidade("Pediatria", "Cuida de criança");
+        Especialidade e3 = new Especialidade("Urologia", "Cuida da partes genitais masculina");
+        Especialidade e4 = new Especialidade("Dermatologia", "Cuida da pele");
+        
+        especialidade.add(e1);
+        especialidade.add(e2);
+        especialidade.add(e3);
+        especialidade.add(e4);
+        
+        
+    }
+    
 }

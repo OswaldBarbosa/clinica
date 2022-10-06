@@ -10,7 +10,43 @@ import br.senai.sp.jandira.model.PlanoDeSaude;
 public class TesteObjetos {
 
     public static void main(String[] args) {
-
+        
+        int [] a = {4, 5, 3, 6};
+        int [] b = new int[8];
+        b[0] = 8;
+        b[1] = 10;
+        b[2] = 3;
+        
+        int c [][] = {
+            {1,2,3},
+            {4,5,6},
+            {7,8,9},
+            {10,11,12}
+        };
+        System.out.println(c[2][1]);
+        
+        String[][] quitanda = {
+            {"banana", "maça", "uva", "morango"},
+            {"alface", "repolho", "couve", "salsinha", "pimentão", "brócolis"},
+            {"abacate", "tomate", "jiló", "abobrinha"}
+        };
+        
+        System.out.println(quitanda[2][1]);
+        
+        int[][][] teste = {{
+            {1,2,3}
+        }, {
+            {4,5,6}
+        }, {
+            {7,8,9}
+        }, {
+            {10,11,12}
+        }};
+        
+        System.out.println(teste[0][1][1]);
+        
+        System.out.println("-------------------------------------------------------------------");
+        
         Especialidade e1 = new Especialidade("Cardiologia");
 //		e1.setNome("Cardiologia");
         e1.setDescricao("Não deixa ter ataque no coração");
@@ -22,8 +58,6 @@ public class TesteObjetos {
         e2.setDescricao("Cuida de criança");
 
         EspecialidadeDAO.gravar(e2);
-
-        System.out.println(EspecialidadeDAO.getEspecialidades());
 
         System.out.println("------------------DAO------------------------");
 
