@@ -89,14 +89,14 @@ public class HomeFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonEspecialidade);
-        buttonEspecialidade.setBounds(220, 120, 60, 50);
+        buttonEspecialidade.setBounds(320, 120, 60, 50);
 
         buttonAgenda.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buttonAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/agenda.png"))); // NOI18N
         buttonAgenda.setToolTipText("Novo Agendamento");
         buttonAgenda.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 255)));
         getContentPane().add(buttonAgenda);
-        buttonAgenda.setBounds(10, 120, 60, 50);
+        buttonAgenda.setBounds(110, 120, 60, 50);
 
         buttonPacientes.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buttonPacientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/paciente.png"))); // NOI18N
@@ -108,7 +108,7 @@ public class HomeFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonPacientes);
-        buttonPacientes.setBounds(150, 120, 60, 50);
+        buttonPacientes.setBounds(250, 120, 60, 50);
 
         buttonMedico.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buttonMedico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/medico.png"))); // NOI18N
@@ -120,7 +120,7 @@ public class HomeFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonMedico);
-        buttonMedico.setBounds(80, 120, 60, 50);
+        buttonMedico.setBounds(180, 120, 60, 50);
 
         buttonHome.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buttonHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/inicio.png"))); // NOI18N
@@ -132,7 +132,7 @@ public class HomeFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonHome);
-        buttonHome.setBounds(660, 120, 60, 50);
+        buttonHome.setBounds(10, 120, 60, 50);
 
         buttonSair.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buttonSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/sair.png"))); // NOI18N
@@ -156,7 +156,7 @@ public class HomeFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buttonPlanoDeSaude1);
-        buttonPlanoDeSaude1.setBounds(290, 120, 60, 50);
+        buttonPlanoDeSaude1.setBounds(390, 120, 60, 50);
 
         panelHome.setLayout(null);
 
