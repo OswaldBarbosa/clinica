@@ -1,20 +1,26 @@
 package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.EspecialidadeDAO;
+import br.senai.sp.jandira.model.Especialidade;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 
 public class PanelEspecialidades extends javax.swing.JPanel {
 
-
+    private int linha;
+    
     public PanelEspecialidades() {
         initComponents();
         EspecialidadeDAO.criarListaDeEspecialidade();
         prencherTabela();
     }
 
-
+    private int getLinha() {
+        linha = tableEspecialidade.getSelectedRow();
+        return linha;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -25,7 +31,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
         jLabelEspecialidade = new javax.swing.JLabel();
         buttonExcluir = new javax.swing.JButton();
         buttonEditar = new javax.swing.JButton();
-        buttonConfirmar = new javax.swing.JButton();
+        buttonAdicionar = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(780, 300));
         setLayout(null);
@@ -79,28 +85,26 @@ public class PanelEspecialidades extends javax.swing.JPanel {
         panelEspecialidade.add(buttonEditar);
         buttonEditar.setBounds(590, 240, 80, 50);
 
-        buttonConfirmar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        buttonConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/adicionar.png"))); // NOI18N
-        buttonConfirmar.setToolTipText("Adicionar");
-        buttonConfirmar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 255)));
-        buttonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+        buttonAdicionar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        buttonAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/adicionar.png"))); // NOI18N
+        buttonAdicionar.setToolTipText("Adicionar");
+        buttonAdicionar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 255)));
+        buttonAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonConfirmarActionPerformed(evt);
+                buttonAdicionarActionPerformed(evt);
             }
         });
-        panelEspecialidade.add(buttonConfirmar);
-        buttonConfirmar.setBounds(680, 240, 80, 50);
+        panelEspecialidade.add(buttonAdicionar);
+        buttonAdicionar.setBounds(680, 240, 80, 50);
 
         add(panelEspecialidade);
         panelEspecialidade.setBounds(0, 0, 780, 300);
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
-        
-        int linha = tableEspecialidade.getSelectedRow();
-        
-        if (linha != -1) {
-            excluirEspecialidade(linha);
+    
+        if (getLinha() != -1) {
+            excluirEspecialidade();
         } else {
             JOptionPane.showMessageDialog(this,
                     "Por favor, selecione a especialidade que você deseja excluir!",
@@ -109,36 +113,39 @@ public class PanelEspecialidades extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_buttonExcluirActionPerformed
 
-    private void excluirEspecialidade(int linha) {
-        String codigoStr = tableEspecialidade.getValueAt(linha, 0).toString();
-        Integer codigo = Integer.valueOf(codigoStr);
+    
+    private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
+
+        if (getLinha() != -1) {
+            editarEspecialidade();
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor, selecione a especialidade que vcoê deseja editar",
+                    "Especialidades",
+                    JOptionPane.WARNING_MESSAGE);
+        }
         
-        int resposta = JOptionPane.showConfirmDialog(this,
-                "Você confirma a exclusão?",
-                "Atenção",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE);
+    }//GEN-LAST:event_buttonEditarActionPerformed
+
+    private void editarEspecialidade () {
+         
+        Especialidade especialidade = EspecialidadeDAO.getEspecialidade(getCodigo());
         
-        EspecialidadeDAO.excluir(codigo);
+        EspecialidadesDialog especialidadeDialog = new EspecialidadesDialog(null, true);
+        especialidadeDialog.setVisible(true);
         prencherTabela();
     }
     
-    private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonEditarActionPerformed
-
-    private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
+    private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
         
         EspecialidadesDialog especilaidadeDialog = new EspecialidadesDialog(null, true);
         especilaidadeDialog.setVisible(true);
         prencherTabela();
         
-        
-    }//GEN-LAST:event_buttonConfirmarActionPerformed
-
+    }//GEN-LAST:event_buttonAdicionarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonConfirmar;
+    private javax.swing.JButton buttonAdicionar;
     private javax.swing.JButton buttonEditar;
     private javax.swing.JButton buttonExcluir;
     private javax.swing.JLabel jLabelEspecialidade;
@@ -146,7 +153,8 @@ public class PanelEspecialidades extends javax.swing.JPanel {
     private javax.swing.JPanel panelEspecialidade;
     private javax.swing.JTable tableEspecialidade;
     // End of variables declaration//GEN-END:variables
-private void prencherTabela() {
+    
+    private void prencherTabela() {
         
     tableEspecialidade.setModel(EspecialidadeDAO.getTabelaEspecialidades());
     ajustarTabela();
@@ -167,4 +175,30 @@ private void prencherTabela() {
         tableEspecialidade.getColumnModel().getColumn(1).setPreferredWidth(300);
         tableEspecialidade.getColumnModel().getColumn(2).setPreferredWidth(390);
     }
+    
+    private Integer getCodigo() {
+        
+        String codigoStr = tableEspecialidade.getValueAt(linha, 0).toString();
+        Integer codigo = Integer.valueOf(codigoStr);
+        return codigo;
+        
+    }
+    
+        private void excluirEspecialidade() {
+        
+        int resposta = JOptionPane.showConfirmDialog(this,
+                "Você confirma a exclusão?",
+                "Atenção",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+        
+        
+        if (resposta == 0) {
+           EspecialidadeDAO.excluir(getCodigo());
+           prencherTabela();
+        }
+        
+    }
+       
 }
+
