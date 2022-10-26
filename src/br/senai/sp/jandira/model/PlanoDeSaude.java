@@ -4,56 +4,73 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class PlanoDeSaude {
+    
+    public static int contador = 13;
+    private String operadora;
+    private String categoria;
+    private LocalDate validade;
+    private String numero;
+    private static int quantidade;
+    private Integer codigo;
+  
+    public PlanoDeSaude(String operadora, String categoria, LocalDate validade, String numero) {
+        this.operadora = operadora;
+        this.categoria = categoria;
+        this.validade = validade;
+        this.numero = numero;
+        quantidade++;
+    }
 
-	private String operadora;
-	private String categoria;
-	private LocalDate validade;
-	private String numero;
-	private static int quantidade;
+    public PlanoDeSaude() {
+    }
+    
+    public void gerarCodifo(){
+        this.contador++;
+        this.codigo = contador;
+    }
 
-	public PlanoDeSaude(String operadora) {
-		this.operadora = operadora;
-		quantidade++;
-	}
+    public void setOperadora(String operadora) {
+        this.operadora = operadora;
+    }
 
-	public PlanoDeSaude() {
-		this.quantidade++;
-	}
+    public String getOperadora() {
+        return operadora;
+    }
 
-	public void setOperadora(String operadora) {
-		this.operadora = operadora;
-	}
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 
-	public String getOperadora() {
-		return operadora;
-	}
+    public String getCategoria() {
+        return categoria;
+    }
 
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
-	}
+    public void setValidade(LocalDate validade) {
+        this.validade = validade;
+    }
 
-	public String getCategoria() {
-		return categoria;
-	}
+    public LocalDate getValidade() {
+        return validade;
+    }
 
-	public void setValidade(LocalDate validade) {
-		this.validade = validade;
-	}
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
 
-	public LocalDate getValidade() {
-		return validade;
-	}
+    public String getNumero() {
+        return numero;
+    }
 
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
+    public static int getQuantidade() {
+        return quantidade;
+    }
 
-	public String getNumero() {
-		return numero;
-	}
+    public Integer getCodigo() {
+        return codigo;
+    }
 
-	public static int getQuantidade() {
-		return quantidade;
-	}
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
 
 }

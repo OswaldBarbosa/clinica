@@ -134,22 +134,6 @@ public class TesteObjetos {
 
         System.out.println("-----------Planos de Saúde-----------");
 
-        // Criar três planos de saúde, armazenar em um arraylist 
-        // e exibir o nome de cada um deles usando foe each
-        PlanoDeSaude p1 = new PlanoDeSaude("Amil");
-        PlanoDeSaude p2 = new PlanoDeSaude("Unimed");
-        PlanoDeSaude p3 = new PlanoDeSaude("Notredame");
-
-        ArrayList<PlanoDeSaude> planosDeSaude = new ArrayList<>();
-        planosDeSaude.add(p1);
-        planosDeSaude.add(p2);
-        planosDeSaude.add(p3);
-
-        for (PlanoDeSaude p : planosDeSaude) {
-            System.out.println(p.getOperadora());
-            System.out.println(p.getQuantidade());
-        }
-
         PlanoDeSaude dnl = new PlanoDeSaude();
 
         System.out.println("Quantos planos de saúde temos: " + PlanoDeSaude.getQuantidade());

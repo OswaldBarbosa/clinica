@@ -7,10 +7,11 @@ import javax.swing.table.DefaultTableModel;
 public class EspecialidadeDAO {
 
     /*
-    
+   
     Essa classe será responsável pela persistecia de dados
     das especialidades, por exemplo,adicionar uma nova especialidade
     excluir uma espeilaidade, etc.
+    
      */
     private static ArrayList<Especialidade> especialidade = new ArrayList<>();
 
