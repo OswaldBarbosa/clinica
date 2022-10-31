@@ -1,6 +1,7 @@
 package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
+import br.senai.sp.jandira.model.OperacaoEnum;
 import br.senai.sp.jandira.model.PlanoDeSaude;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
@@ -13,6 +14,8 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
     public PlanoDeSaudeDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.operacao = operacao;
+        preencherTitulo();
     }
     
         public PlanoDeSaudeDialog(java.awt.Frame parent, boolean modal, OperacaoEnum operacao) {
@@ -21,7 +24,7 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         this.operacao = operacao;
         setIconImage(Toolkit.getDefaultToolkit()
                 .getImage(getClass()
-                        .getResource("/br/senai/sp/jandira/img/agenda.png")));
+                        .getResource("/br/senai/sp/jandira/img/calendario.png")));
     }
 
         public PlanoDeSaudeDialog(java.awt.Frame parent, boolean modal, PlanoDeSaude p, OperacaoEnum operacao) {
@@ -36,7 +39,7 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
 
         setIconImage(Toolkit.getDefaultToolkit()
                 .getImage(getClass()
-                        .getResource("/br/senai/sp/jandira/img/agenda.png")));
+                        .getResource("/br/senai/sp/jandira/img/calendario.png")));
     }
 
     private void preencherFormulario() {
@@ -181,7 +184,7 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         panelDetalhes.add(formattedTextValidade);
         formattedTextValidade.setBounds(300, 140, 90, 18);
 
-        formattedTextNumero.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 255), null));
+        formattedTextNumero.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 255)));
         formattedTextNumero.setColumns(12);
         try {
             formattedTextNumero.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####-####")));
@@ -194,11 +197,12 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         getContentPane().add(panelDetalhes);
         panelDetalhes.setBounds(10, 100, 640, 280);
 
-        setBounds(0, 0, 676, 428);
+        setSize(new java.awt.Dimension(676, 428));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void textFieldCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldCodigoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_textFieldCodigoActionPerformed
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
@@ -206,11 +210,13 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
+        
         if (operacao == OperacaoEnum.ADICIONAR) {
             adicionar();
         } else {
             editar();
         }
+        
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void textFieldOperadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldOperadoraActionPerformed
@@ -222,14 +228,27 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_formattedTextValidadeActionPerformed
 
     private void editar() {
+        CharSequence branco = " ";
+    
+        if (formattedTextValidade.getText().contains(branco) == true || formattedTextNumero.getText().contains(branco) == true || textFieldOperadora.getText().isEmpty()  || textFieldCategoria.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    " Os campos: Operadora, número e validade são obrigatórios!!",
+                    "Atenção!!",
+                    JOptionPane.WARNING_MESSAGE);
+            textFieldCategoria.requestFocus();
+        } else {
         planosDeSaude.setCategoria(textFieldCategoria.getText());
         planosDeSaude.setNumero(formattedTextNumero.getText());
         planosDeSaude.setOperadora(textFieldOperadora.getText());
         planosDeSaude.setDataFormatada(formattedTextValidade.getText());
 
         PlanoDeSaudeDAO.atualizar(planosDeSaude);
-        JOptionPane.showMessageDialog(null, "Plano de saúde editado com sucesso!", "EDITAR", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null,
+                "Plano de saúde editado com sucesso!",
+                "EDITAR", 
+                JOptionPane.INFORMATION_MESSAGE);
         dispose();
+        }
     }
 
     private void adicionar() {
@@ -237,8 +256,11 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         CharSequence branco = " ";
         
         //Espaços em branco
-        if (formattedTextValidade.getText().contains(branco) == true || formattedTextNumero.getText().contains(branco) == true || textFieldOperadora.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, " Os campos: Operadora, número e validade são obrigatórios!!", "Atenção!!", JOptionPane.WARNING_MESSAGE);
+        if (formattedTextValidade.getText().contains(branco) == true || formattedTextNumero.getText().contains(branco) == true || textFieldOperadora.getText().isEmpty()  || textFieldCategoria.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    " Os campos: Operadora, número e validade são obrigatórios!!",
+                    "Atenção!!",
+                    JOptionPane.WARNING_MESSAGE);
             textFieldCategoria.requestFocus();
         } else {
 
@@ -257,8 +279,6 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
             dispose();
         }
 
-        //Criar objeto
-        //Grava objeto
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonCancelar;

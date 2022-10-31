@@ -75,20 +75,28 @@ public class PlanoDeSaudeDAO {
                 "Ouro",
                 LocalDate.of(2026, Month.JANUARY, 12),
                 "7832");
+        
+        planoDeSaude.add(p1);
+        planoDeSaude.add(p2);
+        planoDeSaude.add(p3);
+        planoDeSaude.add(p4);
+        
     }
     
         public static DefaultTableModel getTabelaPlanoDeSaude() {
         
-        String[] titulo = {"CODIGO", "NÚMERO", "OPERADORA", "CATEGORIA"};
-        String[][] dados = new String[planoDeSaude.size()][3];
-        
+        String[] titulo = {"CODIGO", "NÚMERO", "OPERADORA", "CATEGORIA", "VALIDADE"};
+        String[][] dados = new String[planoDeSaude.size()][5];
+         
+        int i = 0;
         
         for (PlanoDeSaude p : planoDeSaude){
-            int i = 0;
             dados[i][0] = p.getCodigo().toString();
-            dados[i][1] = p.getCategoria();
-            dados[i][2] = p.getNumero();
-            dados[i][3] = p.getOperadora();
+            dados[i][1] = p.getNumero();
+            dados[i][2] = p.getOperadora();
+            dados[i][3] = p.getCategoria();
+            dados[i][4] = p.getDataFormatada();
+            i++;
         }
         
         return new DefaultTableModel(dados, titulo);

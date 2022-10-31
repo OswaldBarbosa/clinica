@@ -1,6 +1,5 @@
 package br.senai.sp.jandira.ui;
 
-import br.senai.sp.jandira.dao.EspecialidadeDAO;
 import java.awt.Toolkit;
 
 public class HomeFrame extends javax.swing.JFrame {
@@ -12,7 +11,8 @@ public class HomeFrame extends javax.swing.JFrame {
     }
     
     //Atributos da classe
-    PanelEspecialidades panelEspecialidades;
+    private PanelEspecialidades panelEspecialidades;
+    private PanelPlanodeSaude panelPlanosDeSaude;
     
     //Constantes
     private final int POS_X = 10;
@@ -208,6 +208,7 @@ public class HomeFrame extends javax.swing.JFrame {
         
         panelEspecialidades.setVisible(true);
         panelHome.setVisible(false);
+        panelPlanosDeSaude.setVisible(false);
         
     }//GEN-LAST:event_buttonEspecialidadeActionPerformed
 
@@ -216,12 +217,15 @@ public class HomeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonPacientesActionPerformed
 
     private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_buttonSairActionPerformed
 
     private void buttonHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeActionPerformed
+        
         panelEspecialidades.setVisible(false);
         panelHome.setVisible(true);
+        panelPlanosDeSaude.setVisible(false);
+        
     }//GEN-LAST:event_buttonHomeActionPerformed
 
     private void buttonMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMedicoActionPerformed
@@ -229,43 +233,12 @@ public class HomeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonMedicoActionPerformed
 
     private void buttonPlanoDeSaude1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPlanoDeSaude1ActionPerformed
-        // TODO add your handling code here:
+       
+        panelPlanosDeSaude.setVisible(true);
+        panelHome.setVisible(false);
+        panelEspecialidades.setVisible(false);
+        
     }//GEN-LAST:event_buttonPlanoDeSaude1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HomeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new HomeFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAgenda;
@@ -292,13 +265,22 @@ public class HomeFrame extends javax.swing.JFrame {
 
     private void initPanels() {
         
-            panelEspecialidades = new PanelEspecialidades();
-            panelEspecialidades.setBounds(POS_X, 
+        panelEspecialidades = new PanelEspecialidades();
+        panelEspecialidades.setBounds(POS_X, 
                 POS_Y,
                 LARGURA,
                 ALTURA);
         
         getContentPane().add(panelEspecialidades);
         panelEspecialidades.setVisible(false);
+        
+        panelPlanosDeSaude = new PanelPlanodeSaude();
+        panelPlanosDeSaude.setBounds(POS_X,
+                POS_Y,
+                LARGURA,
+                ALTURA);
+        
+        getContentPane().add(panelPlanosDeSaude);
+        panelPlanosDeSaude.setVisible(false);
     } 
 }

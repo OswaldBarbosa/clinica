@@ -33,6 +33,7 @@ public class PanelPlanodeSaude extends javax.swing.JPanel {
         buttonEditar = new javax.swing.JButton();
         buttonAdicionar = new javax.swing.JButton();
 
+        setPreferredSize(new java.awt.Dimension(780, 300));
         setLayout(null);
 
         panelPlanoDeSaude.setBackground(new java.awt.Color(255, 255, 255));
@@ -101,6 +102,7 @@ public class PanelPlanodeSaude extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
+        
         if(getLinha() != -1){
             excluirPlanoDeSaude();
         } else {
@@ -109,9 +111,11 @@ public class PanelPlanodeSaude extends javax.swing.JPanel {
                     "Atenção",
                     JOptionPane.WARNING_MESSAGE);
         }
+        
     }//GEN-LAST:event_buttonExcluirActionPerformed
 
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
+        
         if(getLinha() != -1){
             editarPlanoDeSaude();
         }else{
@@ -120,12 +124,15 @@ public class PanelPlanodeSaude extends javax.swing.JPanel {
                     "Especialidades",
                     JOptionPane.WARNING_MESSAGE);
         }
+        
     }//GEN-LAST:event_buttonEditarActionPerformed
 
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
+        
         PlanoDeSaudeDialog addTela = new PlanoDeSaudeDialog(null, true, OperacaoEnum.ADICIONAR);
         addTela.setVisible(true);
         prencherTabela();
+        
     }//GEN-LAST:event_buttonAdicionarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -185,9 +192,12 @@ public class PanelPlanodeSaude extends javax.swing.JPanel {
         
         //Definir largura das colunas
         tablePlanoDeSaude.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tablePlanoDeSaude.getColumnModel().getColumn(0).setPreferredWidth(70);
-        tablePlanoDeSaude.getColumnModel().getColumn(1).setPreferredWidth(300);
-        tablePlanoDeSaude.getColumnModel().getColumn(2).setPreferredWidth(390);
+        tablePlanoDeSaude.getColumnModel().getColumn(0).setPreferredWidth(60);
+        tablePlanoDeSaude.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tablePlanoDeSaude.getColumnModel().getColumn(2).setPreferredWidth(200);
+        tablePlanoDeSaude.getColumnModel().getColumn(3).setPreferredWidth(150);
+        tablePlanoDeSaude.getColumnModel().getColumn(4).setPreferredWidth(197);
+        
     }   
         
 }
