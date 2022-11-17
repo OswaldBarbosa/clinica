@@ -48,7 +48,6 @@ public class Especialidade {
         private void gerarCodigo () {
         this.contador++;
         this.codigo = contador;
-        this.contador = codigo;
     }
     
     public void setNome(String nome) {

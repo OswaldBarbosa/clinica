@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class PlanoDeSaude {
-    
-    public static int contador = 13;
+
+    public static int contador = 9;
     private String operadora;
     private String categoria;
     private LocalDate validade;
@@ -14,23 +14,23 @@ public class PlanoDeSaude {
     private Integer codigo;
     private DateTimeFormatter formatador;
     private String dataFormatada;
-  
-        public PlanoDeSaude(String operadora, String categoria, LocalDate validade, String numero) {
-        
+
+    public PlanoDeSaude(String operadora, String categoria, LocalDate validade, String numero) {
+
         formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         dataFormatada = validade.format(formatador);
-        
+
         this.operadora = operadora;
         this.categoria = categoria;
         this.validade = validade;
         this.numero = numero;
     }
-        
-        public PlanoDeSaude(String operadora, String categoria, LocalDate validade, String numero, Integer codigo) {
-        
+
+    public PlanoDeSaude(String operadora, String categoria, LocalDate validade, String numero, Integer codigo) {
+
         formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         dataFormatada = validade.format(formatador);
-        
+
         this.operadora = operadora;
         this.categoria = categoria;
         this.validade = validade;
@@ -38,11 +38,10 @@ public class PlanoDeSaude {
         this.codigo = codigo;
         this.contador = codigo;
     }
-        
 
     public PlanoDeSaude() {
         gerarCodigo();
-        
+
     }
 
     public String getDataFormatada() {
@@ -52,9 +51,8 @@ public class PlanoDeSaude {
     public void setDataFormatada(String dataFormatada) {
         this.dataFormatada = dataFormatada;
     }
-    
-    
-    public void gerarCodigo(){
+
+    public void gerarCodigo() {
         this.contador++;
         this.codigo = contador;
     }
@@ -102,7 +100,7 @@ public class PlanoDeSaude {
     public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
-    
+
     public String getPlanoDeSaudeSeparadoPorPontoEVirgula() {
         return this.codigo + ";" + this.numero + ";" + this.operadora + ";" + this.categoria + ";" + this.dataFormatada;
     }

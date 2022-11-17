@@ -28,7 +28,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
         panelEspecialidade = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tableEspecialidade = new javax.swing.JTable();
-        labelEspecialidade = new javax.swing.JLabel();
+        labelTituloEspecialidade = new javax.swing.JLabel();
         buttonExcluir = new javax.swing.JButton();
         buttonEditar = new javax.swing.JButton();
         buttonAdicionar = new javax.swing.JButton();
@@ -56,10 +56,10 @@ public class PanelEspecialidades extends javax.swing.JPanel {
         panelEspecialidade.add(jScrollPane3);
         jScrollPane3.setBounds(10, 40, 760, 190);
 
-        labelEspecialidade.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        labelEspecialidade.setText("Lista de Especialidades");
-        panelEspecialidade.add(labelEspecialidade);
-        labelEspecialidade.setBounds(20, 10, 210, 25);
+        labelTituloEspecialidade.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelTituloEspecialidade.setText("Lista de Especialidades");
+        panelEspecialidade.add(labelTituloEspecialidade);
+        labelTituloEspecialidade.setBounds(20, 10, 210, 25);
 
         buttonExcluir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buttonExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sp/jandira/img/excluir.png"))); // NOI18N
@@ -149,7 +149,7 @@ public class PanelEspecialidades extends javax.swing.JPanel {
     private javax.swing.JButton buttonEditar;
     private javax.swing.JButton buttonExcluir;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel labelEspecialidade;
+    private javax.swing.JLabel labelTituloEspecialidade;
     private javax.swing.JPanel panelEspecialidade;
     private javax.swing.JTable tableEspecialidade;
     // End of variables declaration//GEN-END:variables
