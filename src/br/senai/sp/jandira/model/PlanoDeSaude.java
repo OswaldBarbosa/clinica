@@ -15,6 +15,11 @@ public class PlanoDeSaude {
     private DateTimeFormatter formatador;
     private String dataFormatada;
 
+    //Contrutores de classe
+    public PlanoDeSaude() { //DEFAULT
+        gerarCodigo();
+    }
+
     public PlanoDeSaude(String operadora, String categoria, LocalDate validade, String numero) {
 
         formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -37,11 +42,6 @@ public class PlanoDeSaude {
         this.numero = numero;
         this.codigo = codigo;
         this.contador = codigo;
-    }
-
-    public PlanoDeSaude() {
-        gerarCodigo();
-
     }
 
     public String getDataFormatada() {

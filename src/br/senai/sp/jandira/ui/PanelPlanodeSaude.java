@@ -13,7 +13,7 @@ public class PanelPlanodeSaude extends javax.swing.JPanel {
     public PanelPlanodeSaude() {
         initComponents();
         PlanoDeSaudeDAO.criarListaDePlanoDeSaude();
-        prencherTabela();
+        preencherTabela();
     }
     
         private int getLinha(){
@@ -131,7 +131,7 @@ public class PanelPlanodeSaude extends javax.swing.JPanel {
         
         PlanoDeSaudeDialog addTela = new PlanoDeSaudeDialog(null, true, OperacaoEnum.ADICIONAR);
         addTela.setVisible(true);
-        prencherTabela();
+        preencherTabela();
         
     }//GEN-LAST:event_buttonAdicionarActionPerformed
 
@@ -153,7 +153,7 @@ public class PanelPlanodeSaude extends javax.swing.JPanel {
                 planoDeSaude, 
                 OperacaoEnum.EDITAR);
        planoDeSaudeDialog.setVisible(true);
-       prencherTabela();
+       preencherTabela();
     }
     
     private void excluirPlanoDeSaude(){
@@ -165,7 +165,7 @@ public class PanelPlanodeSaude extends javax.swing.JPanel {
         
         if(resposta == 0){
             PlanoDeSaudeDAO.excluir(getCodigo());
-            prencherTabela();
+            preencherTabela();
         }
     }
     
@@ -175,11 +175,10 @@ public class PanelPlanodeSaude extends javax.swing.JPanel {
         return codigo;
     }
     
-    private void prencherTabela() {
+    private void preencherTabela() {
         
         tablePlanoDeSaude.setModel(PlanoDeSaudeDAO.getTabelaPlanoDeSaude());
         ajustarTabela();
-
     }
  
         private void ajustarTabela() {
@@ -196,8 +195,7 @@ public class PanelPlanodeSaude extends javax.swing.JPanel {
         tablePlanoDeSaude.getColumnModel().getColumn(1).setPreferredWidth(150);
         tablePlanoDeSaude.getColumnModel().getColumn(2).setPreferredWidth(200);
         tablePlanoDeSaude.getColumnModel().getColumn(3).setPreferredWidth(150);
-        tablePlanoDeSaude.getColumnModel().getColumn(4).setPreferredWidth(197);
-        
+        tablePlanoDeSaude.getColumnModel().getColumn(4).setPreferredWidth(197); 
     }   
         
 }

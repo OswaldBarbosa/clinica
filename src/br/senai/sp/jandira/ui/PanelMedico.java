@@ -1,9 +1,26 @@
 package br.senai.sp.jandira.ui;
 
+import br.senai.sp.jandira.dao.MedicoDAO;
+import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
+import br.senai.sp.jandira.model.Medico;
+import br.senai.sp.jandira.model.OperacaoEnum;
+import br.senai.sp.jandira.model.PlanoDeSaude;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+
 public class PanelMedico extends javax.swing.JFrame {
+
+    private int linha;
 
     public PanelMedico() {
         initComponents();
+        MedicoDAO.criarListaDeMedico();
+        preencherTabela();
+    }
+
+    private int getLinha() {
+        linha = tableMedico.getSelectedRow();
+        return linha;
     }
 
     @SuppressWarnings("unchecked")
@@ -91,6 +108,15 @@ public class PanelMedico extends javax.swing.JFrame {
 
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
 
+        if (getLinha() != -1) {
+            excluirMedico();
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor, selecione o plano que você deseja excluir.",
+                    "Atenção",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+
     }//GEN-LAST:event_buttonExcluirActionPerformed
 
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
@@ -98,7 +124,7 @@ public class PanelMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonEditarActionPerformed
 
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
-
+        
     }//GEN-LAST:event_buttonAdicionarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -110,4 +136,45 @@ public class PanelMedico extends javax.swing.JFrame {
     private javax.swing.JPanel panelMedico;
     private javax.swing.JTable tableMedico;
     // End of variables declaration//GEN-END:variables
+
+    private void excluirMedico() {
+        int resposta = JOptionPane.showConfirmDialog(this,
+                "Você confirma a exclusão?",
+                "Atenção!",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+
+        if (resposta == 0) {
+            MedicoDAO.excluir(getCodigo());
+            preencherTabela();
+        }
+    }
+
+    private Integer getCodigo() {
+        String codigoStr = tableMedico.getValueAt(getLinha(), 0).toString();
+        Integer codigo = Integer.valueOf(codigoStr);
+        return codigo;
+    }
+
+    private void preencherTabela() {
+
+        tableMedico.setModel(MedicoDAO.getTabelaMedico());
+        ajustarTabela();
+    }
+
+    private void ajustarTabela() {
+
+        //Impedir que o usuario movimente as colunas
+        tableMedico.getTableHeader().setReorderingAllowed(false);
+
+        //Bloquear a edição das células da tabela
+        tableMedico.setDefaultEditor(Object.class, null);
+
+        //Definir largura das colunas
+        tableMedico.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tableMedico.getColumnModel().getColumn(0).setPreferredWidth(60);
+        tableMedico.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tableMedico.getColumnModel().getColumn(2).setPreferredWidth(200);
+        tableMedico.getColumnModel().getColumn(3).setPreferredWidth(150);
+    }
 }
