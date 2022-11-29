@@ -17,17 +17,15 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         this.operacao = operacao;
         preencherTitulo();
     }
-    
-        public PlanoDeSaudeDialog(java.awt.Frame parent, boolean modal, OperacaoEnum operacao) {
+
+    public PlanoDeSaudeDialog(java.awt.Frame parent, boolean modal, OperacaoEnum operacao) {
         super(parent, modal);
         initComponents();
         this.operacao = operacao;
-        setIconImage(Toolkit.getDefaultToolkit()
-                .getImage(getClass()
-                        .getResource("/br/senai/sp/jandira/img/calendario.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/br/senai/sp/jandira/img/calendario.png")));
     }
 
-        public PlanoDeSaudeDialog(java.awt.Frame parent, boolean modal, PlanoDeSaude p, OperacaoEnum operacao) {
+    public PlanoDeSaudeDialog(java.awt.Frame parent, boolean modal, PlanoDeSaude p, OperacaoEnum operacao) {
         super(parent, modal);
         initComponents();
 
@@ -36,25 +34,9 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
 
         preencherFormulario();
         preencherTitulo();
-
-        setIconImage(Toolkit.getDefaultToolkit()
-                .getImage(getClass()
-                        .getResource("/br/senai/sp/jandira/img/calendario.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/br/senai/sp/jandira/img/calendario.png")));
     }
 
-    private void preencherFormulario() {
-
-        textFieldCategoria.setText(planosDeSaude.getCategoria());
-        formattedTextNumero.setText(planosDeSaude.getNumero());
-        textFieldOperadora.setText(planosDeSaude.getOperadora());
-        formattedTextValidade.setText(planosDeSaude.getDataFormatada());
-    
-    }
-    
-     private void preencherTitulo() {
-        labelTitulo.setText("Plano de Saúde - " + operacao);
-    }    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -210,13 +192,13 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
     private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
-        
+
         if (operacao == OperacaoEnum.ADICIONAR) {
             adicionar();
         } else {
             editar();
         }
-        
+
     }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void textFieldOperadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldOperadoraActionPerformed
@@ -227,38 +209,50 @@ public class PlanoDeSaudeDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_formattedTextValidadeActionPerformed
 
+    private void preencherFormulario() {
+
+        textFieldCategoria.setText(planosDeSaude.getCategoria());
+        formattedTextNumero.setText(planosDeSaude.getNumero());
+        textFieldOperadora.setText(planosDeSaude.getOperadora());
+        formattedTextValidade.setText(planosDeSaude.getDataFormatada());
+    }
+
+    private void preencherTitulo() {
+        labelTitulo.setText("Plano de Saúde - " + operacao);
+    }
+
     private void editar() {
         CharSequence branco = " ";
-    
-        if (formattedTextValidade.getText().contains(branco) == true || formattedTextNumero.getText().contains(branco) == true || textFieldOperadora.getText().isEmpty()  || textFieldCategoria.getText().isEmpty()) {
+
+        if (formattedTextValidade.getText().contains(branco) == true || formattedTextNumero.getText().contains(branco) == true || textFieldOperadora.getText().isEmpty() || textFieldCategoria.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this,
                     " Os campos: Operadora, número e validade são obrigatórios!!",
                     "Atenção!!",
                     JOptionPane.WARNING_MESSAGE);
             textFieldCategoria.requestFocus();
         } else {
-        planosDeSaude.setCategoria(textFieldCategoria.getText());
-        planosDeSaude.setNumero(formattedTextNumero.getText());
-        planosDeSaude.setOperadora(textFieldOperadora.getText());
-        planosDeSaude.setDataFormatada(formattedTextValidade.getText());
+            planosDeSaude.setCategoria(textFieldCategoria.getText());
+            planosDeSaude.setNumero(formattedTextNumero.getText());
+            planosDeSaude.setOperadora(textFieldOperadora.getText());
+            planosDeSaude.setDataFormatada(formattedTextValidade.getText());
 
-        PlanoDeSaudeDAO.atualizar(planosDeSaude);
-        JOptionPane.showMessageDialog(null,
-                "Plano de saúde editado com sucesso!",
-                "EDITAR", 
-                JOptionPane.INFORMATION_MESSAGE);
-        dispose();
+            PlanoDeSaudeDAO.atualizar(planosDeSaude);
+            JOptionPane.showMessageDialog(null,
+                    "Plano de saúde editado com sucesso!",
+                    "EDITAR",
+                    JOptionPane.INFORMATION_MESSAGE);
+            dispose();
         }
     }
 
     private void adicionar() {
-        
+
         CharSequence branco = " ";
-        
+
         //Espaços em branco
-        if (formattedTextValidade.getText().contains(branco) == true || formattedTextNumero.getText().contains(branco) == true || textFieldOperadora.getText().isEmpty()  || textFieldCategoria.getText().isEmpty()) {
+        if (formattedTextValidade.getText().contains(branco) == true || formattedTextNumero.getText().contains(branco) == true || textFieldOperadora.getText().isEmpty() || textFieldCategoria.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this,
-                    " Os campos: Operadora, número e validade são obrigatórios!!",
+                    " Os campos: Operadora, número e validade são obrigatórios!",
                     "Atenção!!",
                     JOptionPane.WARNING_MESSAGE);
             textFieldCategoria.requestFocus();

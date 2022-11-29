@@ -1,14 +1,11 @@
 package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.MedicoDAO;
-import br.senai.sp.jandira.dao.PlanoDeSaudeDAO;
-import br.senai.sp.jandira.model.Medico;
 import br.senai.sp.jandira.model.OperacaoEnum;
-import br.senai.sp.jandira.model.PlanoDeSaude;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
-public class PanelMedico extends javax.swing.JFrame {
+public class PanelMedico extends javax.swing.JPanel {
 
     private int linha;
 
@@ -35,9 +32,9 @@ public class PanelMedico extends javax.swing.JFrame {
         buttonEditar = new javax.swing.JButton();
         buttonAdicionar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(780, 300));
-        getContentPane().setLayout(null);
+        setRequestFocusEnabled(false);
+        setLayout(null);
 
         panelMedico.setBackground(new java.awt.Color(255, 255, 255));
         panelMedico.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 255)));
@@ -100,10 +97,8 @@ public class PanelMedico extends javax.swing.JFrame {
         panelMedico.add(buttonAdicionar);
         buttonAdicionar.setBounds(680, 240, 80, 50);
 
-        getContentPane().add(panelMedico);
+        add(panelMedico);
         panelMedico.setBounds(0, 0, 780, 300);
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonExcluirActionPerformed
@@ -125,7 +120,12 @@ public class PanelMedico extends javax.swing.JFrame {
 
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
         
+        MedicoDialog addTela = new MedicoDialog(null, true, OperacaoEnum.ADICIONAR);
+        addTela.setVisible(true);
+        preencherTabela();
+        
     }//GEN-LAST:event_buttonAdicionarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAdicionar;
@@ -172,9 +172,9 @@ public class PanelMedico extends javax.swing.JFrame {
 
         //Definir largura das colunas
         tableMedico.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tableMedico.getColumnModel().getColumn(0).setPreferredWidth(60);
-        tableMedico.getColumnModel().getColumn(1).setPreferredWidth(150);
-        tableMedico.getColumnModel().getColumn(2).setPreferredWidth(200);
-        tableMedico.getColumnModel().getColumn(3).setPreferredWidth(150);
+        tableMedico.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tableMedico.getColumnModel().getColumn(1).setPreferredWidth(100);
+        tableMedico.getColumnModel().getColumn(2).setPreferredWidth(370);
+        tableMedico.getColumnModel().getColumn(3).setPreferredWidth(187);
     }
 }
