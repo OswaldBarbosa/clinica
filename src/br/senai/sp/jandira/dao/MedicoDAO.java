@@ -1,7 +1,6 @@
 package br.senai.sp.jandira.dao;
 
 import br.senai.sp.jandira.model.Medico;
-import br.senai.sp.jandira.model.PlanoDeSaude;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -30,7 +30,7 @@ public class MedicoDAO {
      */
     private static ArrayList<Medico> medico = new ArrayList<>();
 
-    public static void gravar(Medico m) {
+    public static void gravar(Medico m) { //SAVE
         medico.add(m);
 
         //GRAVAR EM ARQUIVO
@@ -49,34 +49,7 @@ public class MedicoDAO {
 
     }
 
-    public static ArrayList<Medico> getMedico() {
-        return medico;
-    }
-
-    public static Medico getMedico(Integer codigo) {
-
-        for (Medico m : medico) {
-            if (m.getCodigo() == codigo) {
-                return m;
-            }
-        }
-
-        return null;
-    }
-
-    public static void atualizar(Medico medicoAtualizado) { //UPDATE
-        for (Medico m : medico) {
-            if (m.getCodigo().equals(medicoAtualizado.getCodigo())) {
-                medico.set(medico.indexOf(m), medicoAtualizado);
-                break;
-            }
-        }
-        
-        atualizarArquivo();
-
-    }
-    
-        public static void excluir(Integer codigo) {  //DELETE
+    public static void excluir(Integer codigo) {  //DELETE
 
         for (Medico m : medico) {
             if (m.getCodigo().equals(codigo)) {
@@ -87,6 +60,32 @@ public class MedicoDAO {
 
         atualizarArquivo();
 
+    }
+
+    public static void atualizar(Medico medicoAtualizado) { //UPDATE
+        for (Medico m : medico) {
+            if (m.getCodigo().equals(medicoAtualizado.getCodigo())) {
+                medico.set(medico.indexOf(m), medicoAtualizado);
+                break;
+            }
+        }
+
+        atualizarArquivo();
+
+    }
+
+    public static ArrayList<Medico> getMedico() {
+        return medico;
+    }
+
+    public static Medico getMedico(Integer codigo) {
+        for (Medico m : medico) {
+            if (m.getCodigo().equals(m.getCodigo())) {
+                return m;
+            }
+        }
+
+        return null;
     }
 
     private static void atualizarArquivo() {
@@ -138,10 +137,7 @@ public class MedicoDAO {
                 // Transformar os dados da linha em uma especialidade
                 String[] vetor = linha.split(";");
 
-                Medico m = new Medico(Integer.valueOf(vetor[0]),
-                        vetor[1],
-                        vetor[2],
-                        vetor[3]);
+                Medico m = new Medico(Integer.valueOf(vetor[0]), vetor[1], vetor[2], vetor[3], vetor[4], vetor[5]);
 
                 //Guardar a especialidade na lista
                 medico.add(m);
@@ -162,19 +158,20 @@ public class MedicoDAO {
     public static DefaultTableModel getTabelaMedico() {
 
         String[] titulo = {"CODIGO", "CRM", "NOME", "TELEFONE"};
-        String[][] dados = new String[medico.size()][4];
+        String[][] dados = new String[medico.size()][6];
 
         int i = 0;
 
         for (Medico m : medico) {
             dados[i][0] = m.getCodigo().toString();
             dados[i][1] = m.getCrm();
-            dados[i][2] = m.getNome();
-            dados[i][3] = m.getTelefoneMedico();
+            dados[i][3] = m.getNome();
+            dados[i][2] = m.getTelefoneMedico();
             i++;
         }
 
-        return new DefaultTableModel(dados, titulo);
+        DefaultTableModel model = new DefaultTableModel(dados, titulo);
+        return model;
     }
-    
+
 }

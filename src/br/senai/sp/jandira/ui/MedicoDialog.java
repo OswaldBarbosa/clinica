@@ -260,7 +260,7 @@ public class MedicoDialog extends javax.swing.JDialog {
         labelListaDeEspecialidade.setBounds(10, 140, 140, 20);
 
         getContentPane().add(panelDetalhes);
-        panelDetalhes.setBounds(10, 100, 640, 310);
+        panelDetalhes.setBounds(10, 100, 640, 320);
 
         setSize(new java.awt.Dimension(676, 461));
         setLocationRelativeTo(null);

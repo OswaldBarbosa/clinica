@@ -1,6 +1,7 @@
 package br.senai.sp.jandira.ui;
 
 import br.senai.sp.jandira.dao.MedicoDAO;
+import br.senai.sp.jandira.model.Medico;
 import br.senai.sp.jandira.model.OperacaoEnum;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -138,6 +139,7 @@ public class PanelMedico extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void excluirMedico() {
+        
         int resposta = JOptionPane.showConfirmDialog(this,
                 "Você confirma a exclusão?",
                 "Atenção!",
@@ -149,15 +151,24 @@ public class PanelMedico extends javax.swing.JPanel {
             preencherTabela();
         }
     }
+    
+    private void editarMedico() {
+        
+        Medico medico = new MedicoDAO().getMedico(getCodigo());
+        MedicoDialog medicoDialog = new MedicoDialog(null, true, medico,OperacaoEnum.EDITAR);
+        medicoDialog.setVisible(true);
+        preencherTabela();
+    }
 
     private Integer getCodigo() {
+        
         String codigoStr = tableMedico.getValueAt(getLinha(), 0).toString();
         Integer codigo = Integer.valueOf(codigoStr);
         return codigo;
     }
 
     private void preencherTabela() {
-
+        
         tableMedico.setModel(MedicoDAO.getTabelaMedico());
         ajustarTabela();
     }
@@ -172,9 +183,9 @@ public class PanelMedico extends javax.swing.JPanel {
 
         //Definir largura das colunas
         tableMedico.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tableMedico.getColumnModel().getColumn(0).setPreferredWidth(100);
-        tableMedico.getColumnModel().getColumn(1).setPreferredWidth(100);
-        tableMedico.getColumnModel().getColumn(2).setPreferredWidth(370);
-        tableMedico.getColumnModel().getColumn(3).setPreferredWidth(187);
+        tableMedico.getColumnModel().getColumn(0).setPreferredWidth(110);
+        tableMedico.getColumnModel().getColumn(1).setPreferredWidth(110);
+        tableMedico.getColumnModel().getColumn(2).setPreferredWidth(330);
+        tableMedico.getColumnModel().getColumn(3).setPreferredWidth(207);
     }
 }
