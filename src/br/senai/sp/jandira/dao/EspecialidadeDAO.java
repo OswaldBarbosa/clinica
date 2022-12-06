@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -64,14 +65,14 @@ public class EspecialidadeDAO {
 
     public static void atualizar(Especialidade especialidadeAtualizada) {  // UPDATE
         for (Especialidade e : especialidade) {
-            if (e.getCodigo().equals(especialidadeAtualizada.getCodigo()))  {
+            if (e.getCodigo().equals(especialidadeAtualizada.getCodigo())) {
                 especialidade.set(especialidade.indexOf(e), especialidadeAtualizada);
                 break;
             }
         }
-        
+
         atualizarArquivo();
-        
+
     }
 
     public static void excluir(Integer codigo) {  //DELETE
@@ -82,7 +83,7 @@ public class EspecialidadeDAO {
                 break;
             }
         }
-        
+
         atualizarArquivo();
 
     }
@@ -109,10 +110,10 @@ public class EspecialidadeDAO {
                 bwTemp.newLine();
             }
             bwTemp.close();
-            
+
             // Excluir arquivo atual
             arquivoAtual.delete();
-            
+
             //Renomear o arquivo temporário
             arquivoTemp.renameTo(arquivoAtual);
 
@@ -155,6 +156,14 @@ public class EspecialidadeDAO {
 
     }
 
+    public static DefaultListModel<Especialidade> getModelEsp() {
+        DefaultListModel<Especialidade> listaEspecialidades = new DefaultListModel<Especialidade>();
+        for (Especialidade percorrer : getEspecialidades()) {
+            listaEspecialidades.addElement(percorrer);
+        }
+        return listaEspecialidades;
+    }
+
     public static DefaultTableModel getTabelaEspecialidades() {
 
         String[] titulo = {"CODIGO", "NOME DA ESPECIALIDADE", "DESCRIÇÃO"};
@@ -167,7 +176,8 @@ public class EspecialidadeDAO {
             dados[i][2] = e.getDescricao();
         }
 
-        return new DefaultTableModel(dados, titulo);
+        DefaultTableModel model = new DefaultTableModel(dados, titulo);
+        return model;
 
     }
 

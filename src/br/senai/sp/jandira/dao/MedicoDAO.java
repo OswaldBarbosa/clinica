@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.dao;
 
+import br.senai.sp.jandira.model.Especialidade;
 import br.senai.sp.jandira.model.Medico;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,6 +12,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -62,32 +64,6 @@ public class MedicoDAO {
 
     }
 
-    public static void atualizar(Medico medicoAtualizado) { //UPDATE
-        for (Medico m : medico) {
-            if (m.getCodigo().equals(medicoAtualizado.getCodigo())) {
-                medico.set(medico.indexOf(m), medicoAtualizado);
-                break;
-            }
-        }
-
-        atualizarArquivo();
-
-    }
-
-    public static ArrayList<Medico> getMedico() {
-        return medico;
-    }
-
-    public static Medico getMedico(Integer codigo) {
-        for (Medico m : medico) {
-            if (m.getCodigo().equals(m.getCodigo())) {
-                return m;
-            }
-        }
-
-        return null;
-    }
-
     private static void atualizarArquivo() {
 
         // PASSO 01 - Criar uma representação dos arquivos que  serão manipulado
@@ -124,6 +100,50 @@ public class MedicoDAO {
         }
     }
 
+    public static void atualizar(Medico medicoAtualizado) { //UPDATE
+        for (Medico m : medico) {
+            if (m.getCodigo().equals(medicoAtualizado.getCodigo())) {
+                medico.set(medico.indexOf(m), medicoAtualizado);
+                break;
+            }
+        }
+
+        atualizarArquivo();
+
+    }
+
+    public static ArrayList<Especialidade> separarCodigo(String linha) {
+
+        String[] vetor = linha.split(";");
+
+        int codigoEspecialidade = 6;
+
+        ArrayList<Especialidade> codigos = new ArrayList<>();
+
+        while (codigoEspecialidade < vetor.length) {
+            codigos.add(EspecialidadeDAO.getEspecialidade(Integer.valueOf(vetor[codigoEspecialidade])));
+            codigoEspecialidade++;
+
+        }
+
+        return codigos;
+
+    }
+
+    public static ArrayList<Medico> getMedico() {
+        return medico;
+    }
+
+    public static Medico getMedico(Integer codigo) {
+        for (Medico m : medico) {
+            if (m.getCodigo().equals(m.getCodigo())) {
+                return m;
+            }
+        }
+
+        return null;
+    }
+
     //Criar uma lista inicial de planos de saúde
     public static void criarListaDeMedico() {
 
@@ -137,7 +157,7 @@ public class MedicoDAO {
                 // Transformar os dados da linha em uma especialidade
                 String[] vetor = linha.split(";");
 
-                Medico m = new Medico(Integer.valueOf(vetor[0]), vetor[1], vetor[2], vetor[3], vetor[4], vetor[5]);
+                Medico m = new Medico(vetor[2], vetor[3], vetor[4], vetor[1], vetor[5], Integer.valueOf(vetor[0]), separarCodigo(linha));
 
                 //Guardar a especialidade na lista
                 medico.add(m);
@@ -153,6 +173,27 @@ public class MedicoDAO {
         } catch (IOException error) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao ler o arquivo");
         }
+
+    }
+
+    public static DefaultListModel<Especialidade> getModelEsp() {
+
+        DefaultListModel<Especialidade> listaEspecialidade = new DefaultListModel<>();
+
+        try {
+            BufferedReader leitor = Files.newBufferedReader(PATH);
+
+            String linha = leitor.readLine();
+
+            for (Especialidade percorrer : separarCodigo(linha)) {
+                listaEspecialidade.addElement(percorrer);
+            }
+            leitor.close();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro!");
+        }
+        return listaEspecialidade;
     }
 
     public static DefaultTableModel getTabelaMedico() {
@@ -165,8 +206,10 @@ public class MedicoDAO {
         for (Medico m : medico) {
             dados[i][0] = m.getCodigo().toString();
             dados[i][1] = m.getCrm();
-            dados[i][3] = m.getNome();
-            dados[i][2] = m.getTelefoneMedico();
+            dados[i][2] = m.getNome();
+            dados[i][3] = m.getTelefoneMedico();
+            dados[i][4] = m.getEmail();
+            dados[i][5] = m.getDataFormatada();
             i++;
         }
 

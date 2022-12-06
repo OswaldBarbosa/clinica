@@ -2,6 +2,7 @@ package br.senai.sp.jandira.model;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Medico {
 
@@ -12,23 +13,46 @@ public class Medico {
     private String telefoneMedico;
     private String email;
     private LocalDate dataDeNascimento;
-    private Especialidade[] especialidades;
     private DateTimeFormatter formatador;
     private String dataFormatada;
+    private ArrayList<Especialidade> especialidades;
 
     //Contrutores de classe
     public Medico() { //DEFAULT
         gerarCodigo();
     }
 
-    public Medico(Integer codigo, String crm, String nome, String telefoneMedico, String email, String dataDeNascimento) {
-        
+    public Medico(String crm, String nome, String telefoneMedico, Integer codigo) {
+
         this.crm = crm;
         this.nome = nome;
         this.telefoneMedico = telefoneMedico;
+        this.codigo = codigo;
+    }
+
+    public Medico(String nome, String telefoneMedico, String email, String crm, ArrayList<Especialidade> especialidades, LocalDate dataDeNascimento) {
+
+        formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        dataFormatada = dataDeNascimento.format(formatador);
+
+        this.nome = nome;
+        this.telefoneMedico = telefoneMedico;
         this.email = email;
-        this.dataFormatada = dataDeNascimento;
+        this.crm = crm;
+        this.especialidades = especialidades;
         gerarCodigo();
+    }
+
+    public Medico(String nome, String telefoneMedico, String email, String crm, String dataDeNascimento, Integer codigo, ArrayList<Especialidade> especialidades) {
+
+        this.nome = nome;
+        this.telefoneMedico = telefoneMedico;
+        this.email = email;
+        this.crm = crm;
+        this.dataFormatada = dataDeNascimento;
+        this.especialidades = especialidades;
+        this.codigo = codigo;
+        this.contador = codigo;
     }
 
     //Método gerar código
@@ -86,11 +110,11 @@ public class Medico {
         this.dataDeNascimento = dataDeNascimento;
     }
 
-    public Especialidade[] getEspecialidades() {
+    public ArrayList<Especialidade> getEspecialidades() {
         return especialidades;
     }
 
-    public void setEspecialidades(Especialidade[] especialidades) {
+    public void setEspecialidades(ArrayList<Especialidade> especialidades) {
         this.especialidades = especialidades;
     }
 
@@ -104,6 +128,14 @@ public class Medico {
 
     public String getMedicoSeparadoPorPontoEVirgula() {
         return this.codigo + ";" + this.crm + ";" + this.nome + ";" + this.telefoneMedico + ";" + this.email + ";" + this.dataFormatada + ";" + this.especialidades;
+    }
+
+    public String arrayToString(ArrayList<Especialidade> array) {
+        ArrayList<String> codigos = new ArrayList<>();
+        for (Especialidade e : array) {
+            codigos.add(e.getCodigo().toString());
+        }
+        return String.join(";", codigos);
     }
 
 }

@@ -116,15 +116,24 @@ public class PanelMedico extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonExcluirActionPerformed
 
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
-
+        
+        if (getLinha() != -1) {
+            editarMedico();
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Por favor, selecione o médico que deseja editar.",
+                    "Atenção",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+        
     }//GEN-LAST:event_buttonEditarActionPerformed
 
     private void buttonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAdicionarActionPerformed
-        
+
         MedicoDialog addTela = new MedicoDialog(null, true, OperacaoEnum.ADICIONAR);
         addTela.setVisible(true);
         preencherTabela();
-        
+
     }//GEN-LAST:event_buttonAdicionarActionPerformed
 
 
@@ -139,7 +148,7 @@ public class PanelMedico extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void excluirMedico() {
-        
+
         int resposta = JOptionPane.showConfirmDialog(this,
                 "Você confirma a exclusão?",
                 "Atenção!",
@@ -151,24 +160,24 @@ public class PanelMedico extends javax.swing.JPanel {
             preencherTabela();
         }
     }
-    
+
     private void editarMedico() {
-        
-        Medico medico = new MedicoDAO().getMedico(getCodigo());
-        MedicoDialog medicoDialog = new MedicoDialog(null, true, medico,OperacaoEnum.EDITAR);
+
+        Medico medico = MedicoDAO.getMedico(getCodigo());
+        MedicoDialog medicoDialog = new MedicoDialog(null, true, medico, OperacaoEnum.EDITAR);
         medicoDialog.setVisible(true);
         preencherTabela();
     }
 
     private Integer getCodigo() {
-        
+
         String codigoStr = tableMedico.getValueAt(getLinha(), 0).toString();
         Integer codigo = Integer.valueOf(codigoStr);
         return codigo;
     }
 
     private void preencherTabela() {
-        
+
         tableMedico.setModel(MedicoDAO.getTabelaMedico());
         ajustarTabela();
     }
