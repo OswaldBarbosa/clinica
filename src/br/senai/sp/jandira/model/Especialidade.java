@@ -24,16 +24,20 @@ public class Especialidade {
         this.descricao = descricao;
         gerarCodigo();
     }
-    
-        public Especialidade(String nome, String descricao, Integer codigo) {
+
+    public Especialidade(String nome, String descricao, Integer codigo) {
         this.nome = nome;
         this.descricao = descricao;
         this.codigo = codigo;
         this.contador = codigo;
     }
-    
+
     //Métodos de acesso aos atributos
-        public int getContador() {
+    public String toString() {
+        return this.nome;
+    }
+
+    public int getContador() {
         return contador;
     }
 
@@ -44,12 +48,12 @@ public class Especialidade {
     public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
-    
-        private void gerarCodigo () {
+
+    private void gerarCodigo() {
         this.contador++;
         this.codigo = contador;
     }
-    
+
     public void setNome(String nome) {
 
         if (nome.length() >= 3) {
@@ -76,7 +80,7 @@ public class Especialidade {
         return descricao;
 
     }
-    
+
     public String getEspecialidadeSeparaPorPontoEVirgula() {
         return this.codigo + ";" + this.nome + ";" + this.descricao;
     }

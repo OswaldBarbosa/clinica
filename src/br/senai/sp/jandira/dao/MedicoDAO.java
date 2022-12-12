@@ -178,7 +178,7 @@ public class MedicoDAO {
 
     public static DefaultListModel<Especialidade> getModelEsp() {
 
-        DefaultListModel<Especialidade> listaEspecialidade = new DefaultListModel<>();
+        DefaultListModel<Especialidade> listaEspecialidade = new DefaultListModel<Especialidade>();
 
         try {
             BufferedReader leitor = Files.newBufferedReader(PATH);
@@ -188,12 +188,15 @@ public class MedicoDAO {
             for (Especialidade percorrer : separarCodigo(linha)) {
                 listaEspecialidade.addElement(percorrer);
             }
+            
             leitor.close();
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro!");
         }
+        
         return listaEspecialidade;
+        
     }
 
     public static DefaultTableModel getTabelaMedico() {

@@ -219,7 +219,7 @@ public class HomeFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonPacientesActionPerformed
 
     private void buttonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSairActionPerformed
-
+        dispose();
     }//GEN-LAST:event_buttonSairActionPerformed
 
     private void buttonHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHomeActionPerformed

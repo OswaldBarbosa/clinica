@@ -56,10 +56,11 @@ public class EspecialidadeDAO {
     public static Especialidade getEspecialidade(Integer codigo) {
 
         for (Especialidade e : especialidade) {
-            if (e.getCodigo() == codigo) {
+            if (e.getCodigo().equals(codigo)) {
                 return e;
             }
         }
+        
         return null;
     }
 
@@ -156,7 +157,7 @@ public class EspecialidadeDAO {
 
     }
 
-    public static DefaultListModel<Especialidade> getModelEsp() {
+    public static DefaultListModel<Especialidade> getModelEspecialidade() {
         DefaultListModel<Especialidade> listaEspecialidades = new DefaultListModel<Especialidade>();
         for (Especialidade percorrer : getEspecialidades()) {
             listaEspecialidades.addElement(percorrer);

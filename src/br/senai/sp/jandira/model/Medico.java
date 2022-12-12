@@ -127,15 +127,23 @@ public class Medico {
     }
 
     public String getMedicoSeparadoPorPontoEVirgula() {
-        return this.codigo + ";" + this.crm + ";" + this.nome + ";" + this.telefoneMedico + ";" + this.email + ";" + this.dataFormatada + ";" + this.especialidades;
+        return this.codigo + 
+                ";" + this.crm + 
+                ";" + this.nome + 
+                ";" + this.telefoneMedico + 
+                ";" + this.email + 
+                ";" + this.dataFormatada + 
+                ";" + arrayToString(this.especialidades);
     }
 
     public String arrayToString(ArrayList<Especialidade> array) {
-        ArrayList<String> codigos = new ArrayList<>();
+        ArrayList<String> codigos = new ArrayList<String>();
         for (Especialidade e : array) {
             codigos.add(e.getCodigo().toString());
         }
+        
         return String.join(";", codigos);
+        
     }
 
 }
