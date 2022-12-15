@@ -386,7 +386,7 @@ public class MedicoDialog extends javax.swing.JDialog {
         // Espaços em branco
         if (textFieldCrm.getText().contains(branco)
                 || textFieldNomeDoMedico.getText().isEmpty()
-                || textFieldNomeDoMedico.getText().contains(branco)
+                || textFieldNomeDoMedico.getText().isEmpty()
                 || textFieldEmail.getText().isEmpty()
                 || formattedTextDataDeNascimento.getText().contains(branco)) {
 

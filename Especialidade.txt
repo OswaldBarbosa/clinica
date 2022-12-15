@@ -1,4 +1,0 @@
-100;Clinico Geral;Cuida de Tudo
-101;Cardiologia;Cuida do Coração
-102;Fisioterapeuta;Tratamento de doenças e lesões 
-103;Teste professor;Teste professor
